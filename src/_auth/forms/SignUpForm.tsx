@@ -14,6 +14,7 @@ import { SignUpValidationSchema } from "@/lib/validation";
 import { z } from "zod";
 import { Loader } from "lucide-react";
 import { Link } from "react-router-dom";
+import { createUserAccount } from "@/lib/appwrite/api";
 
 const SignUpForm = () => {
   const isLoading = false;
@@ -28,8 +29,9 @@ const SignUpForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof SignUpValidationSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof SignUpValidationSchema>) {
+    const newUser = await createUserAccount(values)
+    console.log(newUser)
   }
   return (
     <Form {...form}>
@@ -79,7 +81,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>E-mail</FormLabel>
                 <FormControl>
-                  <Input type="email" className="shad-input" {...field} />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
