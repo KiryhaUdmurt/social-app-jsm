@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { SignUpValidationSchema } from "@/lib/validation";
 import { z } from "zod";
 import { Loader } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
   const isLoading = false;
@@ -106,6 +107,15 @@ const SignUpForm = () => {
               "Создать аккаунт"
             )}
           </Button>
+          <p className="text-small-regular text-light-2 text-center mt-2">
+            Уже есть профиль?
+            <Link
+              to="/sigh-in"
+              className="text-primary-500 text-small-semibold ml-2"
+            >
+              Войти
+            </Link>
+          </p>
         </form>
       </div>
     </Form>
