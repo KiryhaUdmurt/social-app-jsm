@@ -71,7 +71,7 @@ const SignUpForm = () => {
 
       navigate("/");
     } else {
-      toast({
+      return toast({
         title: "Ошибка при регистрации. Попробуйте ещё раз.",
       });
     }
