@@ -13,15 +13,20 @@ import { Input } from "@/components/ui/input";
 import { SignUpValidationSchema } from "@/lib/validation";
 import { z } from "zod";
 import { Loader } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import {
   useCreateUserAccountMutation,
   useSignInAccountMutation,
 } from "@/lib/tan-query/queriesAndMutations";
+import { useUserContext } from "@/context/AuthContext";
 
 const SignUpForm = () => {
   const { toast } = useToast();
+
+  const navigate = useNavigate();
+
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
     useCreateUserAccountMutation();
@@ -55,6 +60,18 @@ const SignUpForm = () => {
 
     if (!session) {
       return toast({
+        title: "Ошибка при регистрации. Попробуйте ещё раз.",
+      });
+    }
+
+    const isLoggedIn = await checkAuthUser();
+
+    if (isLoggedIn) {
+      form.reset();
+
+      navigate("/");
+    } else {
+      toast({
         title: "Ошибка при регистрации. Попробуйте ещё раз.",
       });
     }
