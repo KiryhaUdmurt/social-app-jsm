@@ -6,3 +6,8 @@ export const SignUpValidationSchema = z.object({
     email: z.string().email({message: 'Некорректный e-mail'}),
     password: z.string().min(8, {message: 'Слишком короткий пароль'})
   });
+
+  export const SignInValidationSchema = z.object({
+    email: z.string().email({message: 'Некорректный e-mail'}),
+    password: z.string().min(8, {message: 'Слишком короткий пароль'})
+  });

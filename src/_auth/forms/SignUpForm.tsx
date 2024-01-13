@@ -155,7 +155,7 @@ const SignUpForm = () => {
           <p className="text-small-regular text-light-2 text-center mt-2">
             Уже есть профиль?
             <Link
-              to="/sigh-in"
+              to="/sign-in"
               className="text-primary-500 text-small-semibold ml-2"
             >
               Войти

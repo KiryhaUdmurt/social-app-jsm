@@ -6,7 +6,7 @@ export const saveUserToDB = async (user: {
   accountId: string;
   email: string;
   name: string;
-  imageUrl: URL;
+  imageURL: URL;
   username?: string;
 }) => {
   try {
@@ -41,7 +41,7 @@ export const createUserAccount = async (user: INewUser) => {
       name: newAccount.name,
       email: newAccount.email,
       username: user.username,
-      imageUrl: avatarUrl,
+      imageURL: avatarUrl,
     });
 
     return newUser;
