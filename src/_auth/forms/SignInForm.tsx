@@ -109,7 +109,7 @@ const SignInForm = () => {
                 <Loader /> Загрузка...
               </div>
             ) : (
-              "Создать аккаунт"
+              "Войти"
             )}
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">

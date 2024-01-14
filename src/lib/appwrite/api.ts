@@ -78,7 +78,17 @@ export const getCurrentUser = async () => {
 
     if (!currentUser) throw Error;
 
-    return currentUser.documents[0]
+    return currentUser.documents[0];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const signOutAccount = async () => {
+  try {
+    const session = await account.deleteSession("current");
+
+    return session;
   } catch (error) {
     console.log(error);
   }
