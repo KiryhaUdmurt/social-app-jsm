@@ -115,7 +115,7 @@ export const createPost = async (post: INewPost) => {
       {
         creator: post.userId,
         caption: post.caption,
-        imageUrl: fileUrl,
+        imageURL: fileUrl,
         imageId: uploadedFile.$id,
         location: post.location,
         tags: tags,
@@ -147,7 +147,7 @@ export async function uploadFile(file: File) {
   }
 }
 
-export async function getFilePreview(fileId: string) {
+export function getFilePreview(fileId: string) {
   try {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
@@ -184,4 +184,8 @@ export const getRecentPosts = async () => {
   if (!posts) throw Error
 
   return posts
+}
+
+export const likePost = async (postId: string, likesArray: string[]) => {
+
 }
