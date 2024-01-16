@@ -178,14 +178,29 @@ export const getRecentPosts = async () => {
   const posts = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.postCollectionId,
-    [Query.orderDesc('$createdAt'), Query.limit(20)]
-  )
+    [Query.orderDesc("$createdAt"), Query.limit(20)]
+  );
 
-  if (!posts) throw Error
+  if (!posts) throw Error;
 
-  return posts
-}
+  return posts;
+};
 
 export const likePost = async (postId: string, likesArray: string[]) => {
+  try {
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      {
+        likes: likesArray,
+      }
+    );
 
-}
+    if (!updatedPost) throw Error;
+
+    return updatedPost;
+  } catch (error) {
+    console.log(error);
+  }
+};
