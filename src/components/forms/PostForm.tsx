@@ -16,18 +16,27 @@ import { Textarea } from "../ui/textarea";
 import FileUploader from "../shared/FileUploader";
 import { PostValidationSchema } from "@/lib/validation";
 import { Models } from "appwrite";
-import { useCreatePostMutation } from "@/lib/tan-query/queriesAndMutations";
+import {
+  useCreatePostMutation,
+  useUpdatePost,
+} from "@/lib/tan-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { toast, useToast } from "../ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import Loader from "../shared/Loader";
 
 type PostFormProps = {
   post?: Models.Document;
+  action: "Create" | "Update";
 };
 
-const PostForm = ({ post }: PostFormProps) => {
+const PostForm = ({ post, action }: PostFormProps) => {
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePostMutation();
+
+  const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
+    useUpdatePost();
+
   const { user } = useUserContext();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -43,6 +52,21 @@ const PostForm = ({ post }: PostFormProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof PostValidationSchema>) {
+    if (post && action === "Update") {
+      const updatedPost = await updatePost({
+        ...values,
+        postId: post.$id,
+        imageId: post?.imageId,
+        imageURL: post?.imageURL,
+      });
+
+      if (!updatedPost) {
+        toast({ title: "Пожалуйста, попробуйте еще раз." });
+      }
+
+      return navigate(`/posts/${post.$id}`)
+    }
+
     const newPost = await createPost({
       ...values,
       userId: user.id,
@@ -89,7 +113,7 @@ const PostForm = ({ post }: PostFormProps) => {
               <FormControl>
                 <FileUploader
                   fieldChange={field.onChange}
-                  mediaUrl={post?.imageUrl}
+                  mediaUrl={post?.imageURL}
                 />
               </FormControl>
               <FormMessage className="shad-form_message" />
@@ -138,7 +162,9 @@ const PostForm = ({ post }: PostFormProps) => {
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
+            disabled={isLoadingCreate || isLoadingUpdate}
           >
+            {isLoadingCreate || isLoadingUpdate && <Loader /> }
             Подтвердить
           </Button>
         </div>

@@ -40,7 +40,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           name: currentAccount.name,
           username: currentAccount.username,
           email: currentAccount.email,
-          imageUrl: currentAccount.imageURL,
+          imageURL: currentAccount.imageURL,
           bio: currentAccount.bio,
         });
 
