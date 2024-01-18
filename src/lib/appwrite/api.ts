@@ -342,3 +342,19 @@ export const getInfinitePosts = async ({pageParam}: {pageParam: number}) => {
     console.log(error)
   }
 }
+
+export const searchPosts = async (searchTerm: string) => {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.search('caption', searchTerm)]
+    )
+
+    if (!posts) throw Error
+
+    return posts
+  } catch (error) {
+    console.log(error)
+  }
+}
