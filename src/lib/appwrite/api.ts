@@ -321,11 +321,15 @@ export const deletePost = async (postId: string, imageId: string) => {
   }
 };
 
-export const getInfinitePosts = async ({pageParam}: {pageParam: number}) => {
-  const queries: any[] = [Query.orderDesc('$updatedAt'), Query.limit(10)]
+export const getInfinitePosts = async ({
+  pageParam,
+}: {
+  pageParam: number;
+}) => {
+  const queries: string[] = [Query.orderDesc("$updatedAt"), Query.limit(10)];
 
   if (pageParam) {
-    queries.push(Query.cursorAfter(pageParam.toString()))
+    queries.push(Query.cursorAfter(pageParam.toString()));
   }
 
   try {
@@ -333,28 +337,50 @@ export const getInfinitePosts = async ({pageParam}: {pageParam: number}) => {
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       queries
-    )
+    );
 
-    if (!posts) throw Error
+    if (!posts) throw Error;
 
-    return posts
+    return posts;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 export const searchPosts = async (searchTerm: string) => {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      [Query.search('caption', searchTerm)]
-    )
+      [Query.search("caption", searchTerm)]
+    );
 
-    if (!posts) throw Error
+    if (!posts) throw Error;
 
-    return posts
+    return posts;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
+
+export const getUsers = async (limit?: number) => {
+  const queries = [Query.orderDesc("$createdAt")];
+
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+
+  try {
+    const users = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+
+    if (!users) throw Error;
+
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
+};
