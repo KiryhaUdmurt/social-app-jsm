@@ -11,7 +11,7 @@ const UserCard = ({ user }: UserCardProps) => {
   return (
     <Link to={`/profile/${user.$id}`} className="user-card">
       <img
-        src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
+        src={user.imageURL || "/assets/icons/profile-placeholder.svg"}
         alt="creator"
         className="rounded-full w-14 h-14"
       />
@@ -26,7 +26,7 @@ const UserCard = ({ user }: UserCardProps) => {
       </div>
 
       <Button type="button" size="sm" className="shad-button_primary px-5">
-        Follow
+        Подписаться
       </Button>
     </Link>
   );

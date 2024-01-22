@@ -39,7 +39,7 @@ const UpdateProfile = () => {
 
   // Queries
   const { data: currentUser } = useGetUserById(id || "");
-  const { mutateAsync: updateUser, isLoading: isLoadingUpdate } =
+  const { mutateAsync: updateUser, isPending: isLoadingUpdate } =
     useUpdateUser();
 
   if (!currentUser)
@@ -117,7 +117,7 @@ const UpdateProfile = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Name</FormLabel>
+                  <FormLabel className="shad-form_label">Имя</FormLabel>
                   <FormControl>
                     <Input type="text" className="shad-input" {...field} />
                   </FormControl>
@@ -131,7 +131,7 @@ const UpdateProfile = () => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Username</FormLabel>
+                  <FormLabel className="shad-form_label">Логин</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
@@ -169,7 +169,7 @@ const UpdateProfile = () => {
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="shad-form_label">Bio</FormLabel>
+                  <FormLabel className="shad-form_label">О себе</FormLabel>
                   <FormControl>
                     <Textarea
                       className="shad-textarea custom-scrollbar"
@@ -187,7 +187,7 @@ const UpdateProfile = () => {
                 className="shad-button_dark_4"
                 onClick={() => navigate(-1)}
               >
-                Cancel
+                Отменить
               </Button>
               <Button
                 type="submit"
@@ -195,7 +195,7 @@ const UpdateProfile = () => {
                 disabled={isLoadingUpdate}
               >
                 {isLoadingUpdate && <Loader />}
-                Update Profile
+                Обновить профиль
               </Button>
             </div>
           </form>

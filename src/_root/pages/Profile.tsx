@@ -46,7 +46,7 @@ const Profile = () => {
         <div className="flex xl:flex-row flex-col max-xl:items-center flex-1 gap-7">
           <img
             src={
-              currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"
+              currentUser.imageURL || "/assets/icons/profile-placeholder.svg"
             }
             alt="profile"
             className="w-28 h-28 lg:h-36 lg:w-36 rounded-full"
@@ -62,9 +62,9 @@ const Profile = () => {
             </div>
 
             <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
-              <StatBlock value={currentUser.posts.length} label="Posts" />
-              <StatBlock value={20} label="Followers" />
-              <StatBlock value={20} label="Following" />
+              <StatBlock value={currentUser.posts.length} label="Публикации" />
+              <StatBlock value={20} label="Подписчиков" />
+              <StatBlock value={20} label="Подписок" />
             </div>
 
             <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
@@ -86,13 +86,13 @@ const Profile = () => {
                   height={20}
                 />
                 <p className="flex whitespace-nowrap small-medium">
-                  Edit Profile
+                  Изменить профиль
                 </p>
               </Link>
             </div>
             <div className={`${user.id === id && "hidden"}`}>
               <Button type="button" className="shad-button_primary px-8">
-                Follow
+                Подписаться
               </Button>
             </div>
           </div>
@@ -112,7 +112,7 @@ const Profile = () => {
               width={20}
               height={20}
             />
-            Posts
+            Публикации
           </Link>
           <Link
             to={`/profile/${id}/liked-posts`}
@@ -125,7 +125,7 @@ const Profile = () => {
               width={20}
               height={20}
             />
-            Liked Posts
+            Понравившиеся
           </Link>
         </div>
       )}

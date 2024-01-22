@@ -8,7 +8,7 @@ export const INITIAL_USER = {
   name: "",
   username: "",
   email: "",
-  imageUrl: "",
+  imageURL: "",
   bio: "",
 };
 
