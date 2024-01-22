@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
-import { useGetUserById } from "@/lib/tan-query/queriesAndMutations";
+import { useGetUserById, useUpdateUser } from "@/lib/tan-query/queriesAndMutations";
 import Loader from "@/components/shared/Loader";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
