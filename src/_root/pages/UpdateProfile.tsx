@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ProfileValidation } from "@/lib/validation";
+import ProfileUploader from "@/components/shared/ProfileUploader";
 
 const UpdateProfile = () => {
   const { toast } = useToast();
