@@ -18,3 +18,5 @@ export const SignUpValidationSchema = z.object({
     location: z.string().min(2).max(2200),
     tags: z.string()
   });
+
+  
