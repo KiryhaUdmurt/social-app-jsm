@@ -21,8 +21,8 @@ export const SignUpValidationSchema = z.object({
 
   export const ProfileValidation = z.object({
   file: z.custom<File[]>(),
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  username: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  name: z.string().min(2, { message: "Имя должно содержать хотя бы 2 буквы" }),
+  username: z.string().min(2, { message: "Логин должно содержать хотя бы 2 буквы" }),
   email: z.string().email(),
   bio: z.string(),
 });
